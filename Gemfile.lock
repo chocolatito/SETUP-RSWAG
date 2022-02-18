@@ -250,7 +250,7 @@ DEPENDENCIES
   annotate (~> 3.0, >= 3.0.3)
   bootsnap (>= 1.4.4)
   brakeman (~> 5.1, >= 5.1.2)
-  discard
+  discard (~> 1.2, >= 1.2.1)
   dotenv-rails (~> 2.7, >= 2.7.6)
   factory_bot_rails (~> 5.1, >= 5.1.1)
   faker (~> 2.13)
