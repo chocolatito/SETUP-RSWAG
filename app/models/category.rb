@@ -20,6 +20,8 @@ class Category < ApplicationRecord
 
   has_one_attached :image
 
+  has_many :announcements, dependent: :destroy
+
   validates :name, presence: true, length: { minimum: 4 }
   validates :description, presence: true, length: { minimum: 4 }
 end
