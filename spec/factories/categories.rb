@@ -15,11 +15,17 @@
 #
 #  index_categories_on_discarded_at  (discarded_at)
 #
-class Category < ApplicationRecord
-  include Discard::Model
+FactoryBot.define do
+  factory :category do
+    name { Faker::FunnyName.two_word_name }
+    description { Faker::Company.catch_phrase }
+  end
 
-  has_one_attached :image
-
-  validates :name, presence: true, length: { minimum: 4 }
-  validates :description, presence: true, length: { minimum: 4 }
+  # after(:build) do |category|
+  #   category.image.attach(
+  #     io: File.open(Rails.root.join('spec/factories_files/user_icon.jpeg')),
+  #     filename: 'user_icon.jpeg',
+  #     content_type: 'image/jpeg'
+  #   )
+  # end
 end
