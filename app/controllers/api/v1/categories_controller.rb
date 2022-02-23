@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class RolesController < ApplicationController
+    class CategoriesController < ApplicationController
     end
   end
 end
