@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'auth/register', to: 'users#create'
       post 'auth/login', to: 'auth#create'
       resources :categories, only: [:create]
+      post '/organization/public', to: 'organizations#create'
     end
   end
 end
