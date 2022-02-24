@@ -86,6 +86,15 @@ ActiveRecord::Schema.define(version: 2022_02_22_172427) do
     t.index ["discarded_at"], name: "index_roles_on_discarded_at"
   end
 
+  create_table "testimonials", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_testimonials_on_discarded_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "first_name", null: false
