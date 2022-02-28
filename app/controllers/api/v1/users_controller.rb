@@ -13,7 +13,6 @@ module Api
         render json: @users, status: :ok
       end
 
-      before_action :set_user, only: [:update]
       def create
         @user = User.new(user_params)
         @user.role = Role.create_or_find_by(name: 'user', description: 'usuario de la aplicacion')
@@ -42,7 +41,7 @@ module Api
       end
 
       def user_params
-        params.require(:user).permit(:email, :password, :first_name, :last_name)
+        params.permit(:email, :password, :first_name, :last_name)
       end
     end
   end
