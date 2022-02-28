@@ -23,6 +23,15 @@ module Api
         end
       end
 
+      def update
+        @user = current_user
+        if @user.update(user_params)
+          render json: @user, status: :ok
+        else
+          render json: { errors: user.errors }, status: :unprocessable_entity
+        end
+      end
+
       private
 
       def find_user
