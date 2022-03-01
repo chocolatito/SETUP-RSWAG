@@ -3,10 +3,21 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      # POST /api/v1/categories
+      before_action :authenticate_with_token!, only: %i[update]
+      before_action :admin?, only: %i[update]
+
       def create
         @category = Category.create!(category_params)
         render json: serialize_category, status: :created
+      end
+
+      def update
+        @category = Category.find(params[:id])
+        if @category.update(category_params)
+          render json: @category, status: :ok
+        else
+          render json: { errors: category.errors }, status: :unprocessable_entity
+        end
       end
 
       private
