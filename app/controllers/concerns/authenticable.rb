@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 module Authenticable
-
   def authenticate_with_token!
     header = request.headers['Authorization']
-    header = header.split(' ').last if header
+    header = header.split.last if header
     begin
       @decoded = JsonWebToken.decode(header)
       @current_user = User.find(@decoded[:user_id])
