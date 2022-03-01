@@ -3,6 +3,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
+      before_action :authenticate_with_token!, only: %i[update]
       before_action :authorize_request, except: :create
       before_action :find_user, except: %i[create]
       before_action :admin, only: %i[index]
