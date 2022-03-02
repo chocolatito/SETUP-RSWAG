@@ -20,6 +20,15 @@ module Api
         end
       end
 
+      def destroy
+        if @category.discarded?
+          render json: { errors: @category.errors.full_messages }
+        else
+          @category.discard
+          render json: {}, status: :no_content
+        end
+      end
+
       private
 
       def category_params
