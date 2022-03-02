@@ -31,6 +31,9 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
+  # Use Mailcatcher to display emails in development https://mailcatcher.me/
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
