@@ -8,6 +8,7 @@ ruby '2.7.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 
+gem 'aws-sdk-s3', '~> 1.113' # https://rubygems.org/gems/aws-sdk-s3
 gem 'bcrypt', '~> 3.1', '>= 3.1.16' # https://rubygems.org/gems/bcrypt
 gem 'bootsnap', '>= 1.4.4', require: false # https://rubygems.org/gems/bootsnap
 gem 'discard', '~> 1.2', '>= 1.2.1' # https://rubygems.org/gems/discard
@@ -15,7 +16,6 @@ gem 'dotenv-rails', '~> 2.7', '>= 2.7.6' # https://rubygems.org/gems/dotenv-rail
 gem 'jsonapi-serializer', '~> 2.2' # https://rubygems.org/gems/jsonapi-serializer
 gem 'pg', '~> 1.1' # https://rubygems.org/gems/pg
 gem 'puma', '~> 5.0' # https://rubygems.org/gems/puma
-gem 'aws-sdk-s3', '~> 1.113' # https://rubygems.org/gems/aws-sdk-s3
 # gem 'rack-cors' # https://rubygems.org/gems/rack-cors
 
 group :development, :test do
