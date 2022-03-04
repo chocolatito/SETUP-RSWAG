@@ -14,7 +14,6 @@ module Api
       end
 
       before_action :set_user, only: [:update]
-      before_action :ownership?, only: %i[update]
       def create
         @user = User.new(user_params)
         @user.role = Role.create_or_find_by(name: 'user', description: 'usuario de la aplicacion')
