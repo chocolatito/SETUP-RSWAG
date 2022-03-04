@@ -43,7 +43,11 @@ module Api
 
       def user_params
         params.require(:user).permit(:email, :password, :first_name, :last_name)
-      end    
+<<<<<<< HEAD
+      end
+=======
+        end
+>>>>>>> fixed typo
     end
   end
 end
