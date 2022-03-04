@@ -12,7 +12,11 @@ module ExceptionHandler
     rescue_from ActiveRecord::RecordNotFound do |e|
       render json: { message: e.message }, status: :not_found
     end
+<<<<<<< HEAD
     rescue_from ActiveRecord::RecordInvalid, with: :handle_record_invalid
+=======
+    rescue_from ActiveRecord::RecordInvalid, with: :four_twenty_two
+>>>>>>> Added serializer and exception handler
     rescue_from ActionController::ParameterMissing do |e|
       render json: { error: e.message }, status: :bad_request
     end
@@ -24,7 +28,11 @@ module ExceptionHandler
     render json: { ok: false }, status: :unauthorized
   end
 
+<<<<<<< HEAD
   def handle_record_invalid(errors)
+=======
+  def four_twenty_two(errors)
+>>>>>>> Added serializer and exception handler
     render json: { message: errors.message }, status: :unprocessable_entity
   end
 end

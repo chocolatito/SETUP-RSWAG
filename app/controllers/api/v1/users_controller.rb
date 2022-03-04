@@ -26,7 +26,7 @@ module Api
       end
 
       def update
-        if @user.update(user_params)
+        if @user.update!(user_params)
           render json: UserSerializer.new(@user).serializable_hash.to_json
         else
           render json: @user.errors, status: :unprocessable_entity
@@ -35,7 +35,6 @@ module Api
 
       private
 
-<<<<<<< HEAD
       def find_user
         @user = User.find(params[:id])
       rescue ActiveRecord::RecordNotFound
@@ -43,17 +42,8 @@ module Api
       end
 
       def user_params
-        params.permit(:email, :password, :first_name, :last_name)
-      end
-=======
-      def set_user
-        @user = User.find(params[:id])
-      end
-
-      def user_params
         params.require(:user).permit(:email, :password, :first_name, :last_name)
-      end0
->>>>>>> Agregado un método set_user y serialización
+      end    
     end
   end
 end
