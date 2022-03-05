@@ -5,6 +5,12 @@ module Api
     class UsersController < ApplicationController
       before_action :authorize_request, except: :create
       before_action :find_user, except: %i[create]
+      before_action :admin, only: %i[index]
+
+      def index
+        @users = User.all
+        render json: @users, status: :ok
+      end
 
       def create
         @user = User.new(user_params)
@@ -20,7 +26,7 @@ module Api
       private
 
       def find_user
-        @user = User.find_by!(username: params[:_username])
+        @user = User.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         render json: { errors: 'User not found' }, status: :not_found
       end
