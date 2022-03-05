@@ -12,9 +12,9 @@ module Api
       end
 
       def update
-        @category = Category.find_by!(id: params[:id])
+        @category = Category.find(id: params[:id])
         if @category.update!(category_params)
-          render json: @category, status: :ok
+          render json: CategorySerializer.new(@category).serializable_hash.to_json, status: :ok
         else
           render json: { errors: category.errors }, status: :unprocessable_entity
         end
