@@ -12,7 +12,7 @@ module Api
       end
 
       def update
-        @category = Category.find!(params[:id])
+        @category = Category.find_by!(id: params[:id])
         if @category.update!(category_params)
           render json: @category, status: :ok
         else
