@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'auth/register', to: 'users#create'
       post 'auth/login', to: 'auth#create'
+      resources :categories, only: [:create]
     end
   end
 end
