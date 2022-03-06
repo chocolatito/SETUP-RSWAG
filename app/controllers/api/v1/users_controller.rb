@@ -3,6 +3,7 @@
 module Api
   module V1
     class UsersController < ApplicationController
+      before_action :authenticate_with_token!, only: %i[update]
       before_action :authorize_request, except: :create
       before_action :find_user, except: %i[create]
       before_action :admin, only: %i[index]
@@ -12,12 +13,21 @@ module Api
         render json: @users, status: :ok
       end
 
+      before_action :set_user, only: [:update]
       def create
         @user = User.new(user_params)
         @user.role = Role.create_or_find_by(name: 'user', description: 'usuario de la aplicacion')
         if @user.save
           UserNotifierMailer.send_signup_email(@user).deliver
           render json: @user, status: :created
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
+      end
+
+      def update
+        if @user.update!(user_params)
+          render json: UserSerializer.new(@user).serializable_hash.to_json
         else
           render json: @user.errors, status: :unprocessable_entity
         end
@@ -32,7 +42,7 @@ module Api
       end
 
       def user_params
-        params.permit(:email, :password, :first_name, :last_name)
+        params.require(:user).permit(:email, :password, :first_name, :last_name)
       end
     end
   end
