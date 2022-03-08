@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       post 'auth/login', to: 'auth#create'
       resources :categories, only: %i[create update destroy]
       post '/organization/public', to: 'organizations#create'
-      resources :users, only: %i[:update index]
+      resources :users, only: %i[update index]
     end
   end
 end
