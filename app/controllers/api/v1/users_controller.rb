@@ -19,6 +19,7 @@ module Api
         if @user.save
           UserNotifierMailer.send_signup_email(@user).deliver
           render json: @user, status: :created
+          UserWelcome.with(user: @user).send_user_welcome.deliver_later
         else
           render json: @user.errors, status: :unprocessable_entity
         end
