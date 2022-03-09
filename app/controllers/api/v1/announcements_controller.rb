@@ -5,6 +5,7 @@ module Api
     class AnnouncementsController < ApplicationController
       before_action :admin, only: %i[show]
       before_action :set_announcement, only: %i[show]
+
       def show
         render json: serialize_announcement, status: :ok
       end
