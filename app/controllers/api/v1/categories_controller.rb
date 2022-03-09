@@ -4,7 +4,12 @@ module Api
   module V1
     class CategoriesController < ApplicationController
       before_action :authenticate_with_token!, only: %i[update]
-      before_action :admin?, only: %i[update]
+      before_action :admin, only: %i[update show]
+      before_action :set_category, only: %i[show]
+
+      def show
+        render json: serialize_category, status: :ok
+      end
 
       def create
         @category = Category.create!(category_params)
@@ -30,6 +35,10 @@ module Api
       end
 
       private
+
+      def set_category
+        @category = Category.find(params[:id])
+      end
 
       def category_params
         params.require(:category).permit(:name, :description)
