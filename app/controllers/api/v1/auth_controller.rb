@@ -3,6 +3,7 @@
 module Api
   module V1
     class AuthController < ApplicationController
+      before_action :authenticate_with_token!, only: [:show]
       before_action :login_params, only: [:create]
       before_action :user, only: [:create]
 
@@ -11,6 +12,15 @@ module Api
         raise AuthenticationError unless auth_user
 
         render json: serialize_user, status: :created
+      end
+
+      # GET api/v1/auth/me
+      def show
+        if @current_user
+          render json: serialize_user, status: :ok
+        else
+          render json: { ok: false }
+        end
       end
 
       private
