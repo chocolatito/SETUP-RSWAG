@@ -3,16 +3,17 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :authenticate_with_token!, only: %i[update]
-      before_action :find_user, except: %i[create]
+      before_action :authenticate_with_token!, except: %i[create]
+      before_action :find_user, except: %i[index create]
       before_action :admin, only: %i[index]
-      before_action :ownership?, only: %i[update]
+      before_action :ownership?, except: %i[create]
 
       def index
         @users = User.all
         render json: @users, status: :ok
       end
 
+      # POST /api/v1/auth/register
       def create
         @user = User.new(user_params)
         @user.role = Role.find_or_create_by!(name: 'user', description: 'usuario de la aplicacion')
@@ -30,12 +31,16 @@ module Api
         end
       end
 
+      def destroy
+        @user.discard!
+
+        head :no_content
+      end
+
       private
 
       def find_user
         @user = User.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-        render json: { errors: 'User not found' }, status: :not_found
       end
 
       def serialize_user

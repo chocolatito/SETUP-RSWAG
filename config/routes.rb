@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :members, only: %i[index]
       post '/organization/public', to: 'organizations#create'
       resources :testimonials, only: %i[index create]
-      resources :users, only: %i[index update]
+      resources :users, only: %i[index update destroy]
     end
   end
 end
