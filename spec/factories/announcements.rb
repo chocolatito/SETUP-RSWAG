@@ -8,6 +8,7 @@
 #  content      :text             not null
 #  discarded_at :datetime
 #  name         :string           not null
+#  type         :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  category_id  :bigint           not null
@@ -25,6 +26,7 @@ FactoryBot.define do
   factory :announcement do
     name { Faker::TvShows::BreakingBad.character }
     content { Faker::Books::Lovecraft.sentence }
+    type { Faker::Lorem.word }
 
     trait :discarded do
       discarded_at { rand(1..1_000_000).days.ago }
