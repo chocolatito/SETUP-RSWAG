@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class UserWelcome < ApplicationMailer
-def send_user_welcome
+  def send_user_welcome
     @user = params[:user]
     mail(to: @user.email, subject: '¡Bienvenido a Somos Más!')
-end
+  end
 end
