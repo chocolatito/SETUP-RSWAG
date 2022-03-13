@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      resources :announcements, only: %i[show]
       post 'auth/login', to: 'auth#create'
       get 'auth/me', to: 'auth#show'
       post 'auth/register', to: 'users#create'
