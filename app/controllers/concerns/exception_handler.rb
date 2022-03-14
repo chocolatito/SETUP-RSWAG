@@ -16,6 +16,7 @@ module ExceptionHandler
     rescue_from ActionController::ParameterMissing do |e|
       render json: { error: e.message }, status: :bad_request
     end
+    rescue_from Discard::RecordNotDiscarded, with: :handle_record_not_discarded
   end
 
   private
@@ -25,6 +26,10 @@ module ExceptionHandler
   end
 
   def handle_record_invalid(errors)
+    render json: { message: errors.message }, status: :unprocessable_entity
+  end
+
+  def handle_record_not_discarded(errors)
     render json: { message: errors.message }, status: :unprocessable_entity
   end
 end
