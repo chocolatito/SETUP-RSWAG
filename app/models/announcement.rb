@@ -8,6 +8,7 @@
 #  content      :text             not null
 #  discarded_at :datetime
 #  name         :string           not null
+#  type         :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  category_id  :bigint           not null
@@ -29,6 +30,7 @@ class Announcement < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 2 }
   validates :content, presence: true, length: { minimum: 2 }
+  validates :type, presence: true, length: { minimum: 2 }
   validate :check_image_presence
 
   def check_image_presence

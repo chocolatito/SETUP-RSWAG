@@ -8,6 +8,7 @@
 #  content      :text             not null
 #  discarded_at :datetime
 #  name         :string           not null
+#  type         :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  category_id  :bigint           not null
@@ -39,6 +40,8 @@ RSpec.describe Announcement, type: :model do
     it { is_expected.to validate_length_of(:name).is_at_least(2) }
     it { is_expected.to validate_presence_of(:content) }
     it { is_expected.to validate_length_of(:content).is_at_least(2) }
+    it { is_expected.to validate_presence_of(:type) }
+    it { is_expected.to validate_length_of(:type).is_at_least(2) }
   end
 
   describe 'database' do
@@ -46,6 +49,7 @@ RSpec.describe Announcement, type: :model do
     it { is_expected.to have_db_column(:content).of_type(:text).with_options(null: false) }
     it { is_expected.to have_db_column(:discarded_at).of_type(:datetime) }
     it { is_expected.to have_db_column(:name).of_type(:string).with_options(null: false) }
+    it { is_expected.to have_db_column(:type).of_type(:string).with_options(null: false) }
     it { is_expected.to have_db_column(:created_at).of_type(:datetime) }
     it { is_expected.to have_db_column(:updated_at).of_type(:datetime) }
   end

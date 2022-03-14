@@ -8,6 +8,7 @@
 #  content      :text             not null
 #  discarded_at :datetime
 #  name         :string           not null
+#  type         :string           not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  category_id  :bigint           not null
@@ -24,7 +25,7 @@
 class AnnouncementSerializer
   include JSONAPI::Serializer
 
-  attributes :content, :name
-  
+  attributes :name, :content, :type
+
   belongs_to :category
 end
