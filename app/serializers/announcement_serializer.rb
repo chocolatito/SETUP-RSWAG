@@ -23,6 +23,8 @@
 #
 class AnnouncementSerializer
   include JSONAPI::Serializer
-  attributes :name, :content
+
+  attributes :content, :name
+  
   belongs_to :category
 end

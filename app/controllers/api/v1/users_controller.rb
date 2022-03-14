@@ -24,11 +24,8 @@ module Api
       end
 
       def update
-        if @user.update!(user_params)
-          render json: serialize_user
-        else
-          render json: @user.errors, status: :unprocessable_entity
-        end
+        @user.update!(user_params)
+        render json: UserSerializer.new(@user).serializable_hash.to_json
       end
 
       def destroy

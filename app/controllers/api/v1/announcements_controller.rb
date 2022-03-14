@@ -3,10 +3,16 @@
 module Api
   module V1
     class AnnouncementsController < ApplicationController
-      before_action :admin, only: %i[show]
-      before_action :set_announcement, only: %i[show]
+      before_action :authenticate_with_token!, only: %i[update]
+      before_action :admin?, only: %i[update]
+      before_action :set_announcement, only: %i[update]
 
       def show
+        render json: serialize_announcement, status: :ok
+      end
+
+      def update
+        @announcement.update!(announcement_params)
         render json: serialize_announcement, status: :ok
       end
 
@@ -18,6 +24,10 @@ module Api
 
       def serialize_announcement
         AnnouncementSerializer.new(@announcement).serializable_hash.to_json
+      end
+
+      def announcement_params
+        params.require(:announcement).permit(:content, :name, :category_id)
       end
     end
   end
