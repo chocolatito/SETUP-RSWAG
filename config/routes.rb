@@ -8,9 +8,10 @@ Rails.application.routes.draw do
       get 'auth/me', to: 'auth#show'
       post 'auth/register', to: 'users#create'
       resources :categories, only: %i[show create update destroy]
+      resources :members, only: %i[index]
       post '/organization/public', to: 'organizations#create'
       resources :testimonials, only: %i[index create]
-      resources :users, only: %i[:update index]
+      resources :users, only: %i[index update]
     end
   end
 end

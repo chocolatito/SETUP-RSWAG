@@ -7,9 +7,10 @@ module Paginable
     {
       links: {
         first: send(links_paths, page: 1),
-        last: send(links_paths, page: collection.total_pages),
         prev: send(links_paths, page: collection.prev_page),
-        next: send(links_paths, page: collection.next_page)
+        current: send(links_paths, page: collection.current_page),
+        next: send(links_paths, page: collection.next_page),
+        last: send(links_paths, page: collection.total_pages)
       }
     }
   end
