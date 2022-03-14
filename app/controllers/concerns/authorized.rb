@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 module Authorized
+  def admin
+    render json: { errors: 'Unauthorized access' }, status: :forbidden unless admin?
+  end
+
   def admin?
     @current_user.role.name == 'admin'
   end
