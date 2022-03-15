@@ -3,9 +3,14 @@
 module Api
   module V1
     class CategoriesController < ApplicationController
-      before_action :authenticate_with_token!, only: %i[update]
-      before_action :admin, only: %i[update show]
-      before_action :set_category, only: %i[show]
+      # before_action :authenticate_with_token!, only: %i[update]
+      # before_action :admin, only: %i[update show]
+      before_action :set_category, only: %i[show destroy]
+
+      def index
+        @category = Category.all
+        render json: serialize_category, status: :ok
+      end
 
       def show
         render json: serialize_category, status: :ok

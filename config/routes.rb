@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resources :announcements, only: %i[show]
       post 'auth/login', to: 'auth#create'
       get 'auth/me', to: 'auth#show'
       post 'auth/register', to: 'users#create'
-      resources :categories, only: %i[show create update destroy]
+      resources :categories, only: %i[index show create update destroy]
       resources :members, only: %i[index]
       post '/organization/public', to: 'organizations#create'
       resources :testimonials, only: %i[index create]

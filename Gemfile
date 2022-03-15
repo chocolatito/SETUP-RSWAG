@@ -18,6 +18,8 @@ gem 'jwt', '~> 2.3' # https://rubygems.org/gems/jwt
 gem 'kaminari', '~> 1.2', '>= 1.2.2' # https://rubygems.org/gems/kaminari
 gem 'pg', '~> 1.1' # https://rubygems.org/gems/pg
 gem 'puma', '~> 5.0' # https://rubygems.org/gems/puma
+gem 'rswag-api'
+gem 'rswag-ui'
 # gem 'rack-cors' # https://rubygems.org/gems/rack-cors
 
 group :development, :test do
@@ -25,6 +27,7 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.9', platform: :mri # https://rubygems.org/gems/pry-byebug
   gem 'pry-rails', '~> 0.3.9' # https://rubygems.org/gems/pry-rails
   gem 'rspec-rails', '~> 4.1' # https://rubygems.org/gems/rspec-rails
+  gem 'rswag-specs'
 end
 
 group :development do

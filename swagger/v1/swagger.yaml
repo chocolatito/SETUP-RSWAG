@@ -1,0 +1,123 @@
+---
+swagger: '2.0'
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/categories":
+    get:
+      summary: Retrieves all categories
+      tags:
+      - Category
+      produces:
+      - application/json
+      responses:
+        '200':
+          description: Categories found
+          examples:
+            application/json:
+              data:
+              - id: '141'
+                type: category
+                attributes:
+                  name: Ryan Carnation
+                  description: Re-engineered directional projection
+              - id: '142'
+                type: category
+                attributes:
+                  name: Joy Kil
+                  description: Upgradable empowering structure
+    post:
+      summary: Create a category
+      tags:
+      - Category
+      consumes:
+      - application/json
+      parameters:
+      - name: params
+        in: body
+        schema:
+          type: object
+          properties:
+            category:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: text
+              required:
+              - name
+              - description
+          required:
+          - category
+      produces:
+      - application/json
+      responses:
+        '201':
+          description: Category created
+          examples:
+            application/json:
+              data:
+                id: '144'
+                type: category
+                attributes:
+                  name: Helena Hanbaskett
+                  description: Reduced composite leverage
+        '422':
+          description: Category creation failed for parameter missing
+          examples:
+            application/json:
+              message: 'Validation failed: Name can''t be blank, Name is too short
+                (minimum is 4 characters), Description can''t be blank, Description
+                is too short (minimum is 4 characters)'
+  "/api/v1/categories/{id}":
+    get:
+      summary: Retrieves a category.
+      tags:
+      - Category
+      description: a category
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      responses:
+        '200':
+          description: Category found
+          examples:
+            application/json:
+              data:
+                id: '143'
+                type: category
+                attributes:
+                  name: Theresa Green
+                  description: Multi-channelled coherent definition
+        '404':
+          description: Category not found
+          examples:
+            application/json:
+              message: Couldn't find Category with 'id'=-1
+    delete:
+      summary: Update a category
+      tags:
+      - Category
+      consumes:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        type: string
+        required: true
+      produces:
+      - application/json
+      responses:
+        '204':
+          description: Destroy the category
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
